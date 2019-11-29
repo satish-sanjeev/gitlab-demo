@@ -15,6 +15,7 @@ cache:
     - .terraform
 
 before_script:
+  - cd customer1
   - terraform --version
   - terraform init
 
