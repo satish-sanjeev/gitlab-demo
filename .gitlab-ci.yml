@@ -34,6 +34,7 @@ validate:
 plan:
   stage: plan
   script:
+    - cd customer1
     - terraform plan -out=$PLAN
     - echo \`\`\`diff > plan.txt
     - terraform show -no-color ${PLAN} | tee -a plan.txt
