@@ -15,7 +15,7 @@ cache:
     # - .terraform
 
 before_script:
-  - cd customer1
+  - cd customer2
   - terraform --version
   - terraform init
   - echo "this is the path:`pwd`"
@@ -35,7 +35,7 @@ validate:
 plan:
   stage: plan
   script:
-    - cd customer1
+    - cd customer2
     - terraform plan -out plan.tfplan
     - echo \`\`\`diff > plan.txt
     - terraform show -no-color plan.tfplan | tee -a plan.txt
@@ -48,10 +48,10 @@ plan:
       curl -X POST -g -H "PRIVATE-TOKEN: ${GITLAB_ACCESS_TOKEN}" 
       --data-urlencode "body=${MESSAGE}" 
       "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests/${CI_MERGE_REQUEST_IID}/discussions"
-  artifacts:
-    name: plan
-    paths:
-      - plan.tfplan
+  # artifacts:
+  #   name: plan
+  #   paths:
+  #     - plan.tfplan
   only:
     - merge_requests
 
