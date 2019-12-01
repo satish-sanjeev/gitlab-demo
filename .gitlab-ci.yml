@@ -69,7 +69,7 @@ build:
 apply:
   stage: apply
   script:
-    - terraform apply -input=false plan.tfplan
+    - terraform apply -input=false
   dependencies:
     - build
   when: manual
