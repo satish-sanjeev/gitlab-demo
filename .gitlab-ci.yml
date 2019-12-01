@@ -18,6 +18,7 @@ before_script:
   - cd customer1
   - terraform --version
   - terraform init
+  - echo "this is the path:`pwd`"
 
 stages:
   - validate
