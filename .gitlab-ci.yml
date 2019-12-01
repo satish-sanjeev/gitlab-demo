@@ -12,7 +12,7 @@ variables:
 
 cache:
   paths:
-    - .terraform
+    # - .terraform
 
 before_script:
   - cd customer1
