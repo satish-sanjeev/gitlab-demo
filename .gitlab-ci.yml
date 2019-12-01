@@ -19,7 +19,6 @@ before_script:
   - terraform --version
   - terraform init
   - echo "this is the path:`pwd`"
-  - echo "" >> plan.tfplan
 
 stages:
   - validate
@@ -37,9 +36,9 @@ plan:
   stage: plan
   script:
     - cd customer1
-    - terraform plan -out=$PLAN
+    - terraform plan -out plan.tfplan
     - echo \`\`\`diff > plan.txt
-    - terraform show -no-color ${PLAN} | tee -a plan.txt
+    - terraform show -no-color plan.tfplan | tee -a plan.txt
     - echo \`\`\` >> plan.txt
     - sed -i -e 's/  +/+/g' plan.txt
     - sed -i -e 's/  ~/~/g' plan.txt
@@ -52,25 +51,25 @@ plan:
   artifacts:
     name: plan
     paths:
-      - $PLAN
+      - plan.tfplan
   only:
     - merge_requests
 
 build:
   stage: plan
   script:
-    - terraform plan -out=$PLAN
+    - terraform plan -out plan.tfplan
   artifacts:
     name: plan
     paths:
-      - $PLAN
+      - plan.tfplan
   only:
     - master
 
 apply:
   stage: apply
   script:
-    - terraform apply -input=false $PLAN
+    - terraform apply -input=false plan.tfplan
   dependencies:
     - build
   when: manual
