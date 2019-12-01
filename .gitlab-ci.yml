@@ -19,6 +19,7 @@ before_script:
   - terraform --version
   - terraform init
   - echo "this is the path:`pwd`"
+  - echo "" >> plan.tfplan
 
 stages:
   - validate
