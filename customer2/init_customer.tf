@@ -1,10 +1,10 @@
-// module "customer1" {
-//   source        = "../modules/env-build"
-//   customer-name = "phdata-customer2"
-//   region        = "us-east-1"
-// }
+module "customer1" {
+  source        = "../modules/env-build"
+  customer-name = "phdata-customer2"
+  region        = "us-east-1"
+}
 
-
+    
 
 terraform {
   backend "s3" {
